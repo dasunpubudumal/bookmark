@@ -172,6 +172,8 @@
       <p class="note">Signed in as <strong id="accountEmail"></strong>. Your books sync to your Supabase account.</p>
       <p class="note sync-line" id="syncLine"></p>
       <div class="menu-actions">
+        <button type="button" class="btn primary" id="installBtn" hidden>Install app</button>
+        <p class="note small" id="installHint" hidden>To install on iPhone: tap <strong>Share</strong>, then <strong>Add to Home Screen</strong>.</p>
         <button type="button" class="btn ghost" id="exportBtn">Export backup (.json)</button>
         <label class="btn ghost" for="importFile">Import backup</label>
         <input type="file" id="importFile" accept="application/json,.json" hidden>

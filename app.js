@@ -820,6 +820,37 @@ function boot() {
   sb.auth.onAuthStateChange((_event, session) => setTimeout(() => handleSession(session), 0));
 }
 
+/* ---------------- install as an app (PWA) ---------------- */
+
+let installPrompt = null;
+const isStandalone = () =>
+  window.matchMedia('(display-mode: standalone)').matches || navigator.standalone === true;
+
+// Chrome / Edge / Android: offer our own Install button.
+window.addEventListener('beforeinstallprompt', e => {
+  e.preventDefault();
+  installPrompt = e;
+  $('#installBtn').hidden = false;
+});
+
+$('#installBtn').addEventListener('click', async () => {
+  if (!installPrompt) return;
+  installPrompt.prompt();
+  await installPrompt.userChoice;
+  installPrompt = null;
+  $('#installBtn').hidden = true;
+});
+
+window.addEventListener('appinstalled', () => {
+  $('#installBtn').hidden = true;
+  toast('Bookmark installed');
+});
+
+// iPhone/iPad Safari has no install prompt, so show how to do it by hand.
+if (/iPhone|iPad|iPod/.test(navigator.userAgent) && !isStandalone()) {
+  $('#installHint').hidden = false;
+}
+
 if ('serviceWorker' in navigator) {
   window.addEventListener('load', () => navigator.serviceWorker.register('sw.js').catch(() => {}));
 }

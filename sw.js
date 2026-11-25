@@ -1,7 +1,7 @@
 // Offline support: network-first for the app's own files, so updates
 // show up immediately when online and the app still opens offline.
-const CACHE = 'bookmark-shell-v2';
-const SHELL = ['./', 'index.html', 'styles.css', 'app.js', 'config.js', 'vendor/supabase-2.118.0.js', 'icon.svg', 'icon-180.png', 'manifest.webmanifest'];
+const CACHE = 'bookmark-shell-v3';
+const SHELL = ['./', 'index.html', 'styles.css', 'app.js', 'config.js', 'vendor/supabase-2.118.0.js', 'icon.svg', 'icon-180.png', 'icon-192.png', 'icon-512.png', 'icon-maskable-512.png', 'manifest.webmanifest'];
 
 self.addEventListener('install', event => {
   event.waitUntil(caches.open(CACHE).then(c => c.addAll(SHELL)).then(() => self.skipWaiting()));

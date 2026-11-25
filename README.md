@@ -39,7 +39,29 @@ git push -u origin main
 
 Then on GitHub, open **Settings → Pages** and set *Source* to **GitHub Actions**. The workflow in `.github/workflows/pages.yml` checks the JavaScript and deploys on every push to `main`. You can also re-run it from the **Actions** tab. After a minute the app is live at `https://<your-username>.github.io/bookmark/`.
 
-**On your phone:** open that URL, then use **Share → Add to Home Screen** (iPhone, Safari) or **⋮ → Add to Home screen** (Android, Chrome). It then opens full-screen like an app.
+## 3. Install it as an app
+
+Bookmark is a Progressive Web App (PWA): it installs like an app, opens full-screen, and works offline.
+
+- **iPhone / iPad (Safari):** open the site, tap **Share → Add to Home Screen**. The account menu shows this hint on iOS.
+- **Android (Chrome):** tap **Install app** in the account menu, or **⋮ → Install app**.
+- **Mac / PC (Chrome or Edge):** click **Install app** in the account menu, or the install icon in the address bar.
+- **Mac (Safari 17+):** **File → Add to Dock**.
+
+## 4. Native macOS app (optional)
+
+`macos/` holds a small native Mac app (Swift + WebKit, no dependencies) that opens Bookmark in its own window. It loads the live site, so it picks up every deploy automatically and stays signed in between launches. Export/Import backup, links and dialogs all work.
+
+```bash
+./macos/build.sh            # needs Xcode or the Command Line Tools
+open macos/build/Bookmark.app
+```
+
+The script creates a universal app (Apple Silicon and Intel) and a `Bookmark.dmg` installer in `macos/build/`. To install it, drag `Bookmark.app` into **Applications**.
+
+The app is ad-hoc signed, not notarised. It runs fine on the Mac that built it. If you copy it to another Mac, right-click it and choose **Open** the first time to get past Gatekeeper.
+
+To point the app at a different URL (for example a fork), change `appURL` at the top of `macos/Sources/main.swift`.
 
 ## Where your data lives
 
