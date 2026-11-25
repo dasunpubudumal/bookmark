@@ -348,6 +348,7 @@ function handleSession(session) {
   outbox = readJSON(outboxKey(), {});
   books = readJSON(cacheKey(), []).map(normalize).filter(Boolean);
   $('#accountEmail').textContent = user.email || '';
+  $('#avatarInitial').textContent = (user.email || '?').charAt(0).toUpperCase();
   $('#authForm').reset();
   showScreen('app');
   migrateLegacy();
@@ -364,6 +365,7 @@ $('#signOutBtn').addEventListener('click', async () => {
   } catch { /* ignore */ }
   // 'local' signs out this device only and works offline.
   await sb.auth.signOut({ scope: 'local' });
+  toast('Signed out');
 });
 
 /* ---------------- helpers ---------------- */
