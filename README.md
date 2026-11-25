@@ -37,7 +37,7 @@ git remote add origin https://github.com/<your-username>/bookmark.git
 git push -u origin main
 ```
 
-Then on GitHub, open **Settings → Pages**. Under *Build and deployment*, choose **Deploy from a branch**, pick `main` and `/ (root)`, and save. After a minute the app is live at `https://<your-username>.github.io/bookmark/`.
+Then on GitHub, open **Settings → Pages** and set *Source* to **GitHub Actions**. The workflow in `.github/workflows/pages.yml` checks the JavaScript and deploys on every push to `main`. You can also re-run it from the **Actions** tab. After a minute the app is live at `https://<your-username>.github.io/bookmark/`.
 
 **On your phone:** open that URL, then use **Share → Add to Home Screen** (iPhone, Safari) or **⋮ → Add to Home screen** (Android, Chrome). It then opens full-screen like an app.
 
